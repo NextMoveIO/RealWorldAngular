@@ -9,6 +9,10 @@ const routes: Routes = [
         component: HomeComponent
     },
     {
+        path: "account",
+        loadChildren: "./real-world/modules/account/account.module#AccountModule"
+    },
+    {
         path: "articles",
         loadChildren: "./real-world/modules/articles/articles.module#ArticlesModule"
     }
