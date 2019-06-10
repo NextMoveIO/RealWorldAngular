@@ -1,0 +1,67 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand"
+     href="#">BlogPress</a>
+  <button class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse"
+       id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link"
+           href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"
+           href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"
+           href="#">Pricing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled"
+           href="#"
+           tabindex="-1"
+           aria-disabled="true">Disabled</a>
+      </li>
+    </ul>
+    <form *ngIf="userDto" class="form-inline my-2 my-lg-0">
+      <div>Welcome&nbsp;</div>
+      <div>{{userDto?.emailAddress}}!</div>
+    </form>
+  </div>
+</nav>
+
+<h2>Account</h2>
+<p>
+  <a href="/account/register">Register</a>
+</p>
+
+<p>
+  <a href="/account/log-in">Log In</a>
+</p>
+
+<p>
+  <a href="/account/log-out">Logout</a>
+</p>
+
+<h2>Articles</h2>
+<p>
+  <a href="/articles">List</a>
+</p>
+<p>
+  <a href="/articles/new">Create</a>
+</p>
+<p>
+  <a href="/articles/edit/1">Edit</a>
+</p>
+<p>
+  <a href="/articles/view/1">View</a>
+</p>
