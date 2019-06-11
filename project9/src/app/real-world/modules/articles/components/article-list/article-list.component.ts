@@ -24,6 +24,9 @@ export class ArticleListComponent implements OnInit {
   async readArticles() {
     this.articles = await this.articleService.getAll();
     console.log(this.articles);
+    if (this.articles && this.articles.length === 0) {
+      this.articles = null;
+    }
   }
 
   publishState(state: PublishState): string {
