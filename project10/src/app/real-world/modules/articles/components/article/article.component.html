@@ -1,0 +1,92 @@
+<div class="container">
+  <h2>
+    <ng-container *ngIf="pageMode == Mode.Create">New Article</ng-container>
+    <ng-container *ngIf="pageMode == Mode.View">View Article</ng-container>
+    <ng-container *ngIf="pageMode == Mode.Edit">Edit Article</ng-container>
+  </h2>
+  <ng-container>
+    <div class="row">
+      <div class="col-md-12 text-right">
+        <ng-container *ngIf="pageMode == Mode.Create">
+          <button class="btn btn-md btn-success"
+                  (click)="create()">Create</button>&nbsp;
+        </ng-container>
+
+        <ng-container *ngIf="pageMode != Mode.View">
+          <button class="btn btn-md btn-warning"
+                  (click)="update()">Update</button>&nbsp;
+        </ng-container>
+
+        <ng-container *ngIf="(pageMode == Mode.Edit || pageMode == Mode.Create) && (article?.state == State.Draft)">
+          <button class="btn btn-md btn-primary"
+                  (click)="publish()">Publish</button>&nbsp;
+        </ng-container>
+
+        <ng-container *ngIf="(pageMode == Mode.Edit || pageMode == Mode.Create) && (article?.state == State.Published)">
+          <button class="btn btn-md btn-info"
+                  (click)="publish()">Unpublish</button>&nbsp;
+        </ng-container>
+
+        <ng-container *ngIf="pageMode != Mode.Create || pageMode != Mode.View">
+          <button class="btn btn-md btn-danger"
+                  (click)="delete()">Delete</button>
+        </ng-container>
+
+      </div>
+    </div>
+    <p></p>
+    <div *ngIf="saveError"
+         class="row">
+      <div class="col-md-12">
+        <div class="alert alert-danger"
+             role="alert">
+          Error saving the article
+        </div>
+      </div>
+    </div>
+    <p></p>
+    <div *ngIf="saveSuccess"
+         class="row">
+      <div class="col-md-12">
+        <div class="alert alert-success"
+             role="alert">
+          Article saved!
+        </div>
+      </div>
+    </div>
+    <p></p>
+    <div class="row">
+      <div class="col-md-12">
+        <form>
+          <div class="form-group row">
+            <label for="inputTitle"
+                   class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+              <input type="text"
+                     class="form-control"
+                     id="inputTitle"
+                     placeholder="Enter Title"
+                     name="articleTitle"
+                     [readOnly]="pageMode == Mode.View"
+                     [(ngModel)]="article.title">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputContent"
+                   class="col-sm-2 col-form-label">Content</label>
+            <div class="col-sm-10">
+              <textarea id="inputContent"
+                        class="form-control"
+                        rows="15"
+                        aria-label="Content"
+                        placeholder="Enter Content"
+                        name="articleContent"
+                        [readOnly]="pageMode == Mode.View"
+                        [(ngModel)]="article.content"></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </ng-container>
+</div>

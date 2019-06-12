@@ -1,0 +1,93 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Article List</h2>
+        </div>
+        <div class="col-md-12 text-right">
+            <button class="btn btn-sm btn-warning"
+                    [routerLink]="['/','articles','new']">New Article</button>
+            <p></p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-12">
+            <pagination [totalItems]="totalCount"
+                        [(ngModel)]="currentPage"
+                        (pageChanged)="pageChanged($event)"></pagination>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead class="thead-dark"
+               *ngIf="articles">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col"
+                    width="10%">State</th>
+                <th scope="col"
+                    width="20%">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngIf="!articles">
+                <tr>
+                    <td colspan=4>
+                        <em>No Articles found!</em>
+                    </td>
+                </tr>
+            </ng-container>
+            <ng-container *ngFor="let article of articles">
+                <tr>
+                    <th>{{article.id}}</th>
+                    <td>{{article.title}}</td>
+                    <td>{{publishState(article.state)}}</td>
+                    <td class="text-right">
+                        <!-- <app-action (edit)="edit(article.id)"
+                        (view)="view(article.id)"
+                        (delete)="delete(article.id, deleteConfirmationTemplate)"></app-action> -->
+                        <app-action (edit)="edit(article.id)"
+                                    (view)="view(article.id)"
+                                    (delete)="deleteArticle(article.id)"></app-action>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div class="col-xs-12 col-12">
+            <pagination [totalItems]="totalCount"
+                        [(ngModel)]="currentPage"
+                        (pageChanged)="pageChanged($event)"></pagination>
+        </div>
+    </div>
+
+    <p></p>
+
+    <div class="row">
+        <div class="col-md-12">Total articles found: {{totalCount}}</div>
+    </div>
+
+</div>
+
+<!-- <ng-template #deleteConfirmationTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button"
+            class="close pull-right"
+            aria-label="Close"
+            (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    This is a modal.
+  </div>
+  <div class="modal-footer">
+    <button type="button"
+            class="btn btn-default"
+            (click)="modalRef.hide();onConfirmDelete(id);">Ok</button>
+  </div>
+</ng-template> -->

@@ -16,7 +16,6 @@ export abstract class HttpServiceBase {
     }
 
     async post<C>(path: string, entity: any, fromApiFn?: any, options?: any): Promise<C> {
-      console.log("post>>>>>");
         const url = `${this.baseUrl}/${path}`;
         const promise = new Promise((resolve, reject) => {
             this.httpClient.post(url, entity, options)
