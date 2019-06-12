@@ -23,14 +23,14 @@ export class ArticleListComponent implements OnInit {
     constructor(private router: Router, private modalService: BsModalService, private articleService: ArticleService) { }
 
     async ngOnInit() {
-        this.readArticles();
+        this.readArticles(0);
     }
 
-    async readArticles() {
+    async readArticles(page: number) {
         this.totalCount = await this.articleService.getCount();
         console.log(this.totalCount);
 
-        await this.readPage(0);
+        await this.readPage(page);
 
         if (this.articles && this.articles.length === 0) {
             this.articles = null;
@@ -39,12 +39,12 @@ export class ArticleListComponent implements OnInit {
 
     async pageChanged(event: PageChangedEvent) {
         console.log(event.page);
-        await this.readPage((event.page - 1) * PageSize);
+        await this.readPage((event.page - 1));
     }
 
     // page is 0-based
     async readPage(page: number) {
-        this.articles = await this.articleService.getAll(page, PageSize);
+        this.articles = await this.articleService.getAll(page * PageSize, PageSize);
         console.log(this.articles);
     }
 
@@ -78,7 +78,7 @@ export class ArticleListComponent implements OnInit {
     async onConfirmDelete(id: number) {
         console.log("delete confirmed. ", id);
         await this.articleService.delete(id.toString());
-        await this.readArticles();
+        await this.readArticles(this.currentPage - 1);
     }
 
 }

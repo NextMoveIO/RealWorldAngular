@@ -22,7 +22,7 @@ export class AuthenticationHttpInterceptor implements HttpInterceptor {
                 headers: request.headers.append('Authorization', 'Bearer ' + authenticationToken)
             });
 
-            handler = next.handle(authenticatedRequest); //.share();
+            handler = next.handle(authenticatedRequest).pipe(share());
 
             handler.subscribe((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
