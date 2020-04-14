@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
         this.authTokenStore.resetAuthentication();
 
         const authToken = await this.accountService.register({
-            emailAddress: "a@a.com", password: "password"
+            emailAddress: "user@domain4.com", password: "password"
         });
 
         this.authTokenStore.setAuthentication(authToken.token);
